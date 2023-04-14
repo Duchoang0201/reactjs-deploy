@@ -13,7 +13,7 @@ interface DataType {
 function CategoryCRUD() {
   const API_URL = "http://localhost:9000/categories";
   const [categories, setCategories] = useState<Array<DataType>>([]);
-  const [refresh, setrefresh] = useState(0);
+  const [refresh, setRefresh] = useState(0);
   const [createForm] = Form.useForm();
   const [updateForm] = Form.useForm();
   const [open, setOpen] = useState(false);
@@ -46,6 +46,15 @@ function CategoryCRUD() {
   // Patch Item
   const handleUpdate = (record: any) => {
     console.log(updateId, record);
+    axios
+      .post(API_URL, record)
+      .then((response) => {
+        setRefresh((f) => f + 1);
+        createForm.resetFields();
+        message.success("Thêm mới danh mục thành công!", 1.5);
+      })
+      .catch((err) => {});
+
     // axios
     //   .patch(API_URL + "/" + updateId, record)
     //   .then((res) => {

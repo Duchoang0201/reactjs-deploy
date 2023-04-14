@@ -35,16 +35,24 @@ function SupperliersCRUD() {
   const handleCreate = (record: any) => {
     axios
       .post(API_URL, record)
-      .then((res) => {
-        console.log(res.data);
+      .then((response) => {
         setRefresh((f) => f + 1);
-        message.success(" Add new Suppliers sucessfully!", 1.5);
         createForm.resetFields();
+        message.success("Thêm mới danh mục thành công!", 1.5);
       })
-      .catch((err) => {
-        console.log(err);
-        message.error(err.response.data.message);
-      });
+      .catch((err) => {});
+
+    // .post(API_URL, record)
+    // .then((res) => {
+    //   console.log(res.data);
+    //   setRefresh((f) => f + 1);
+    //   message.success(" Add new Suppliers sucessfully!", 1.5);
+    //   createForm.resetFields();
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    //   message.error(err.response.data.message);
+    // });
   };
   //Delete a Data
   const handleDelete = (record: any) => {

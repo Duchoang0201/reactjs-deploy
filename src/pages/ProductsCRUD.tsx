@@ -33,18 +33,26 @@ const ProductsCRUD = () => {
     // console.log(record);
     axios
       .post(API_URL, record)
-      .then((res) => {
-        console.log(res);
+      .then((response) => {
         setRefresh((f) => f + 1);
         createForm.resetFields();
-        message.success("Create a product successFully!!", 1.5);
+        message.success("Thêm mới danh mục thành công!", 1.5);
       })
-      .catch((err) => {
-        console.log(err.response.data.message);
-        err.response.data.errors.map((item: any, index: any) => {
-          message.error(`${item}`, 5);
-        });
-      });
+      .catch((err) => {});
+
+    // .post(API_URL, record)
+    // .then((res) => {
+    //   console.log(res);
+    //   setRefresh((f) => f + 1);
+    //   createForm.resetFields();
+    //   message.success("Create a product successFully!!", 1.5);
+    // })
+    // .catch((err) => {
+    //   console.log(err.response.data.message);
+    //   err.response.data.errors.map((item: any, index: any) => {
+    //     message.error(`${item}`, 5);
+    //   });
+    // });
   };
   //Delete a data
   const handleDelete = (recordId: any) => {

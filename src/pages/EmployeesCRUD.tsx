@@ -45,23 +45,31 @@ const EmployeesCRUD = () => {
 
   //Create a data
   const handleCreate = (record: any) => {
-    const newData = {
-      ...record,
-      birthday: `${record.birthday.$y}-${record.birthday.$M + 1}-${
-        record.birthday.$D
-      }`,
-    };
-    // console.log(birthdayCreate)
+    // const newData = {
+    //   ...record,
+    //   birthday: `${record.birthday.$y}-${record.birthday.$M + 1}-${
+    //     record.birthday.$D
+    //   }`,
+    // };
+    // // console.log(birthdayCreate)
+    // axios
+    //   .post(API_URL, newData)
+    //   .then((res) => {
+    //     console.log(res);
+    //     setRefresh((f) => f + 1);
+    //     message.success("Create a new Employee successfully!!", 1.5);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     axios
-      .post(API_URL, newData)
-      .then((res) => {
-        console.log(res);
+      .post(API_URL, record)
+      .then((response) => {
         setRefresh((f) => f + 1);
-        message.success("Create a new Employee successfully!!", 1.5);
+        createForm.resetFields();
+        message.success("Thêm mới danh mục thành công!", 1.5);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
   //Delete a data
   const handleDelete = (recordId: any) => {
