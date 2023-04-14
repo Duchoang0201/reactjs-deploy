@@ -42,10 +42,6 @@ const CustomerCRUD = () => {
       });
   }, [refresh]);
 
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
   //Create a Data
   const handleCreate = (record: any) => {
     const newData = {

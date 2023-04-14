@@ -178,13 +178,7 @@ const ProductsCRUD = () => {
   const onSearchCategory = (value: string) => {
     console.log("search:", value);
   };
-  const onChangeSupplier = (value: string) => {
-    console.log(`selected ${value}`);
-  };
 
-  const onSearchSupplier = (value: string) => {
-    console.log("search:", value);
-  };
   return (
     <>
       <Form

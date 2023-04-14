@@ -53,11 +53,6 @@ const Navigation: React.FC = () => {
   };
   const [current, setCurrent] = useState("category");
 
-  const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click ", e);
-    setCurrent(e.key);
-  };
-
   return (
     <Menu
       onClick={onMenuClick}
