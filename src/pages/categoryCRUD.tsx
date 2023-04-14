@@ -60,7 +60,7 @@ function CategoryCRUD() {
     //   .then((res) => {
     //     console.log(res);
     //     message.success("Sửa danh mục thành công", 1.5);
-    //     setrefresh((f) => f + 1);
+    //     setRefresh((f) => f + 1);
     //     updateForm.resetFields();
     //     setOpen(false);
     //   })
@@ -74,7 +74,7 @@ function CategoryCRUD() {
       .then((res) => {
         console.log(res.data);
         message.success("Xóa danh mục thành công", 1.5);
-        setrefresh((f) => f + 1);
+        setRefresh((f) => f + 1);
       })
       .catch((err) => console.log(err));
   };
