@@ -2,7 +2,6 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {
   Button,
   DatePicker,
-  DatePickerProps,
   Form,
   Input,
   message,
@@ -44,22 +43,31 @@ const CustomerCRUD = () => {
 
   //Create a Data
   const handleCreate = (record: any) => {
-    const newData = {
-      ...record,
-      birthday: `${record.birthday.$y}-${record.birthday.$M + 1}-${
-        record.birthday.$D
-      } `,
-    };
-    console.log(record);
+    // const newData = {
+    //   ...record,
+    //   birthday: `${record.birthday.$y}-${record.birthday.$M + 1}-${
+    //     record.birthday.$D
+    //   } `,
+    // };
+    // console.log(record);
+    // axios
+    //   .post(API_URL, newData)
+    //   .then((res) => {
+    //     message.success("Create new data sucessfully!!", 1.5);
+    //     setRefresh((f) => f + 1);
+    //   })
+    //   .catch((res) => {
+    //     message.success("Create new data unsucessfully!!", 1.5);
+    //   });
+
     axios
-      .post(API_URL, newData)
-      .then((res) => {
-        message.success("Create new data sucessfully!!", 1.5);
+      .post(API_URL, record)
+      .then((response) => {
         setRefresh((f) => f + 1);
+        createForm.resetFields();
+        message.success("Thêm mới danh mục thành công!", 1.5);
       })
-      .catch((res) => {
-        message.success("Create new data unsucessfully!!", 1.5);
-      });
+      .catch((err) => {});
   };
   //Delete a data
   const handleDelte = (recordID: any) => {
