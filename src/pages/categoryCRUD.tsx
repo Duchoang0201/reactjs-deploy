@@ -38,7 +38,7 @@ function CategoryCRUD() {
       .then((res) => {
         console.log(res);
         message.success("Thêm mới danh mục thành công", 1.5);
-        setrefresh((f) => f + 1);
+        setRefresh((f) => f + 1);
         createForm.resetFields();
       })
       .catch((err) => console.log(err));
