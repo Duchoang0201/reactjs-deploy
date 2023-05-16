@@ -13,7 +13,7 @@ interface DataType {
 function CategoryCRUD() {
   const API_URL = "http://localhost:9000/categories";
   const [categories, setCategories] = useState<Array<DataType>>([]);
-  const [refresh, setRefresh] = useState<any>(0);
+  const [refresh, setRefresh] = useState<any>();
   const [createForm] = Form.useForm();
   const [updateForm] = Form.useForm();
   const [open, setOpen] = useState(false);
@@ -35,10 +35,10 @@ function CategoryCRUD() {
     console.log(data);
     axios
       .post(API_URL, data)
-      .then((res) => {
+      .then((res: any) => {
         console.log(res);
         message.success("Thêm mới danh mục thành công", 1.5);
-        setRefresh((f) => f + 1);
+        setRefresh((f: any) => f + 1);
         createForm.resetFields();
       })
       .catch((err) => console.log(err));
@@ -49,7 +49,7 @@ function CategoryCRUD() {
     axios
       .post(API_URL, record)
       .then((response) => {
-        setRefresh((f) => f + 1);
+        setRefresh((f: any) => f + 1);
         createForm.resetFields();
         message.success("Thêm mới danh mục thành công!", 1.5);
       })
@@ -63,7 +63,7 @@ function CategoryCRUD() {
       .then((res) => {
         console.log(res.data);
         message.success("Xóa danh mục thành công", 1.5);
-        setRefresh((f) => f + 1);
+        setRefresh((f: any) => f + 1);
       })
       .catch((err) => console.log(err));
   };
@@ -116,86 +116,83 @@ function CategoryCRUD() {
   ];
 
   return (
-    <div>
-      <div className="container d-flex flex-row justify-content-center">
-        <Form
-          form={createForm}
-          // labelCol={{ span: 8 }}
-          // wrapperCol={{ span: 16 }}
-          // style={{ maxWidth: 600 }}
-          // initialValues={{ remember: true }}
-          onFinish={handleSumbit}
-          // onFinishFailed={onFinishFailed}
-          autoComplete="off"
+    <>
+      <div>
+        <div className="container d-flex flex-row justify-content-center">
+          <Form form={createForm} onFinish={handleSumbit} autoComplete="off">
+            <Form.Item
+              hasFeedback
+              label="Username"
+              name="name"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              hasFeedback
+              label="Description"
+              name="description"
+              rules={[
+                { required: true, message: "Please input your description!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+
+        <div className="container">
+          <Table
+            rowKey="id"
+            dataSource={categories}
+            columns={columns}
+            pagination={false}
+          ></Table>
+        </div>
+
+        <Modal
+          open={open}
+          title="Update cateroty"
+          onCancel={() => setOpen(false)}
+          onOk={() => {
+            updateForm.submit();
+          }}
         >
-          <Form.Item
-            hasFeedback
-            label="Username"
-            name="name"
-            rules={[{ required: true, message: "Please input your username!" }]}
-          >
-            <Input />
-          </Form.Item>
+          <Form form={updateForm} onFinish={handleUpdate} autoComplete="off">
+            <Form.Item
+              hasFeedback
+              label="Username"
+              name="name"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            hasFeedback
-            label="Description"
-            name="description"
-            rules={[
-              { required: true, message: "Please input your description!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
+            <Form.Item
+              hasFeedback
+              label="Description"
+              name="description"
+              rules={[
+                { required: true, message: "Please input your description!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Form>
+        </Modal>
       </div>
-
-      <div className="container">
-        <Table
-          rowKey="id"
-          dataSource={categories}
-          columns={columns}
-          pagination={false}
-        ></Table>
-      </div>
-
-      <Modal
-        open={open}
-        title="Update cateroty"
-        onCancel={() => setOpen(false)}
-        onOk={() => {
-          updateForm.submit();
-        }}
-      >
-        <Form form={updateForm} onFinish={handleUpdate} autoComplete="off">
-          <Form.Item
-            hasFeedback
-            label="Username"
-            name="name"
-            rules={[{ required: true, message: "Please input your username!" }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            hasFeedback
-            label="Description"
-            name="description"
-            rules={[
-              { required: true, message: "Please input your description!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </div>
+    </>
   );
 }
 
