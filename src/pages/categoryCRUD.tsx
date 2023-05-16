@@ -13,7 +13,7 @@ interface DataType {
 function CategoryCRUD() {
   const API_URL = "http://localhost:9000/categories";
   const [categories, setCategories] = useState<Array<DataType>>([]);
-  const [refresh, setRefresh] = useState(0);
+  const [refresh, setRefresh] = useState<any>(0);
   const [createForm] = Form.useForm();
   const [updateForm] = Form.useForm();
   const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ function CategoryCRUD() {
       .then((res: any) => {
         setCategories(res.data);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.log("Error:", error);
         alert("Something went wrong!");
       });
@@ -54,17 +54,6 @@ function CategoryCRUD() {
         message.success("Thêm mới danh mục thành công!", 1.5);
       })
       .catch((err) => {});
-
-    // axios
-    //   .patch(API_URL + "/" + updateId, record)
-    //   .then((res) => {
-    //     console.log(res);
-    //     message.success("Sửa danh mục thành công", 1.5);
-    //     setRefresh((f) => f + 1);
-    //     updateForm.resetFields();
-    //     setOpen(false);
-    //   })
-    //   .catch((err) => console.log(err));
   };
   //Delte Item
   const handleDelete = (data: any) => {
